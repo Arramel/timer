@@ -6,11 +6,11 @@
     </div>
 
     <div v-for="interval in intervals" :key="interval.id" class="interval">
-        <Interval :interval="interval" @intervalChange="$emit('intervalChange', interval)" />
+        <Interval :interval="interval" @intervalChange="$emit('intervalChange', interval)" @deleteInterval="$emit('deleteInterval', interval.id)" />
     </div>
 
     <div class="buttons">
-        <Start @start="start"/>
+        <Start :started="started" @start="start"/>
         <button class="add" @click="$emit('addInterval')">
             <div class="crossY"></div>
             <div class="crossX"></div>
@@ -29,7 +29,7 @@ export default {
         Interval,
         Start
     },
-    props: ['intervals'],
+    props: ['intervals', 'started'],
     data() {
         return {
             repeat: 1

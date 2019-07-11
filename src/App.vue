@@ -1,8 +1,8 @@
 <template>
 <div id="app">
 
-    <DisplayCircle :started="started" :repeat="repeat" :data="intervals" />
-    <Intervals :intervals="intervals" @intervalChange="editInterval" @addInterval="addInterval" @start="startStop" />
+    <DisplayCircle :started="started" :repeat="repeat" :data="intervals" @stop="started = false" />
+    <Intervals :intervals="intervals" :started="started" @intervalChange="editInterval" @addInterval="addInterval" @start="startStop" @deleteInterval="deleteInterval" />
 
 </div>
 </template>
@@ -23,8 +23,8 @@ export default {
             repeat: null,
             intervals: [{
                 id: 0,
-                last: '10',
-                colour: '#ff23cc'
+                last: '5',
+                colour: '#ff6766'
             }]
         }
     },
@@ -45,7 +45,7 @@ export default {
                 last: '0',
                 colour
             };
-            
+
             this.intervals.push(newInterval);
         },
         randColour() {
@@ -60,6 +60,9 @@ export default {
         startStop(start, repeat) {
             this.started = start;
             this.repeat = repeat;
+        },
+        deleteInterval(id) {
+            this.intervals = this.intervals.filter(a => a.id != id);
         }
     }
 }

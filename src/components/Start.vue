@@ -5,11 +5,7 @@
 <script>
 export default {
     name: 'Start',
-    data() {
-        return {
-            started: false,
-        }
-    },
+    props: ['started'],
     methods: {
         start() {
             this.started = !this.started;
